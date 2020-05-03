@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ContainerProps {
   size?: 'small' | 'large';
+  pageName: '/' | '/import';
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -17,11 +18,39 @@ export const Container = styled.div<ContainerProps>`
     justify-content: space-between;
 
     nav {
+      display: flex;
+      flex-direction: row;
+
       a {
         color: #fff;
         text-decoration: none;
         font-size: 16px;
         transition: opacity 0.2s;
+        display: flex;
+        flex-direction: column;
+
+        ${({ pageName }) =>
+          pageName === '/'
+            ? css`
+                &:first-child::after {
+                  content: '';
+                  position: absolute;
+                  width: 74px;
+                  height: 2px;
+                  top: 69px;
+                  background: #ff872c;
+                }
+              `
+            : css`
+                &:last-child::after {
+                  content: '';
+                  position: absolute;
+                  width: 74px;
+                  height: 2px;
+                  top: 69px;
+                  background: #ff872c;
+                }
+              `}
 
         & + a {
           margin-left: 32px;
